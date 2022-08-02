@@ -5,7 +5,8 @@ import { request } from ".";
 import { getAdminUrl } from "../config";
 
 export const getCosAuthorization = async () => {
-  const url = `${getAdminUrl()}/third/tencent_cloud_storage_credential`;
+  // const url = `${getAdminUrl()}/third/tencent_cloud_storage_credential`;
+  const url = `${getAdminUrl()}/third/minio_storage_credential`;
   const { data, errCode } = await request.post(
     url,
     {

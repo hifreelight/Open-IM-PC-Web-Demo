@@ -44,8 +44,8 @@
     "eject": "react-scripts eject",
     "el": "electron .",
     "start:main": "run-p electron:*",
-    "electron:run": "wait-on http://localhost:3000 && tsc -p electron && electron .",
-    "electron:main": "wait-on http://localhost:3000 && tsc -p electron -w",
+    "electron:run": "wait-on http://localhost:8000 && tsc -p electron && electron .",
+    "electron:main": "wait-on http://localhost:8000 && tsc -p electron -w",
     "electron:renderer": "cross-env BROWSER=none npm run start:renderer"
   },
   "eslintConfig": {

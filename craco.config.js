@@ -1,9 +1,12 @@
 const CracoLessPlugin = require("craco-less");
 const path = require("path");
-const { whenProd,getPlugin,pluginByName } = require("@craco/craco");
+const { whenProd, getPlugin, pluginByName } = require("@craco/craco");
 const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
+  devServer: {
+    port: 8000
+  },
   webpack: {
     alias: {
       "@": path.join(__dirname, "./src"),

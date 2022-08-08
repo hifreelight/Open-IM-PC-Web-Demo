@@ -27,7 +27,7 @@ async function createWindow() {
   setTray(win);
 
   if (isDev) {
-    win.loadURL("http://localhost:3000");
+    win.loadURL("http://localhost:8000");
   } else {
     // 'build/index.html'
     win.loadURL(`file://${__dirname}/../index.html`);

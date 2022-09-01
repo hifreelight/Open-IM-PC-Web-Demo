@@ -5,7 +5,7 @@ const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
   devServer: {
-    port: 8000
+    port: 3000
   },
   webpack: {
     alias: {

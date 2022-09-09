@@ -17,7 +17,7 @@ import { DELETEMESSAGE, ISSETDRAFT, MERMSGMODAL, MUTILMSG, OPENGROUPMODAL, RESET
 import { animateScroll } from "react-scroll";
 import MerModal from "./components/MerModal";
 import { SelectType } from "../components/MultipleSelectBox";
-import { getGroupInfo, getGroupMemberList, setGroupMemberList } from "../../../store/actions/contacts";
+import { getGroupInfo, getGroupKeyList, getGroupMemberList, setGroupMemberList } from "../../../store/actions/contacts";
 import { ConversationItem, FriendItem, GroupItem, GroupMemberItem, MergeElem, MergerMsgParams, MessageItem, PictureElem, WsResponse } from "../../../utils/open_im_sdk/types";
 import { useTranslation } from "react-i18next";
 import { setCurCve } from "../../../store/actions/cve";
@@ -279,6 +279,14 @@ const Home = () => {
         count: 2000,
       };
       dispatch(getGroupMemberList(options));
+
+      // ge group key
+      const groupKeyOptions = {
+        groupID: cve.groupID,
+        offset: 0,
+        count: 100,
+      };
+      dispatch(getGroupKeyList(groupKeyOptions));
     }
   };
 
@@ -305,7 +313,7 @@ const Home = () => {
 
   const getHistoryMsg = (uid?: string, gid?: string, sMsg?: MessageItem) => {
     console.log("getMsg:::");
-    
+
     const config = {
       userID: uid ?? "",
       groupID: gid ?? "",

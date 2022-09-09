@@ -210,6 +210,13 @@ export type GetGroupMemberParams = {
   count: number;
 };
 
+export type GetGroupKeyParams = {
+  groupID: string;
+  offset: number;
+  count: number;
+};
+
+
 export type CreateGroupParams = {
   groupBaseInfo: GroupInitInfo;
   memberList: Member[];

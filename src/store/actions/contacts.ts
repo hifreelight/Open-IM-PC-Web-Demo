@@ -1,7 +1,7 @@
 import { Dispatch } from "redux";
 import { MemberMapType } from "../../@types/open_im";
 import { im } from "../../utils";
-import { BlackItem, FriendApplicationItem, FriendItem, GetGroupMemberParams, GroupApplicationItem, GroupItem, GroupMemberItem, TotalUserStruct } from "../../utils/open_im_sdk/types";
+import { BlackItem, FriendApplicationItem, FriendItem, GetGroupKeyParams, GetGroupMemberParams, GroupApplicationItem, GroupItem, GroupMemberItem, TotalUserStruct } from "../../utils/open_im_sdk/types";
 import {
   ContactActionTypes,
   SET_BLACK_LIST,
@@ -113,8 +113,8 @@ export const setUnReadCount = (value: number): ContactActionTypes => {
 export const getFriendList = () => {
   return (dispatch: Dispatch) => {
     im.getFriendList().then((res) => {
-      let tmp:FriendItem[] = []
-      JSON.parse(res.data).forEach((item:TotalUserStruct)=>!item.blackInfo&&tmp.push(item.friendInfo!))
+      let tmp: FriendItem[] = []
+      JSON.parse(res.data).forEach((item: TotalUserStruct) => !item.blackInfo && tmp.push(item.friendInfo!))
       dispatch(setFriendList(tmp))
     });
   };
@@ -128,7 +128,7 @@ export const getGroupList = () => {
 
 export const getBlackList = () => {
   return (dispatch: Dispatch) => {
-    im.getBlackList().then((res) =>{
+    im.getBlackList().then((res) => {
       dispatch(setBlackList(JSON.parse(res.data)))
     });
   };
@@ -168,9 +168,21 @@ export const getGroupMemberList = (options: GetGroupMemberParams) => {
   };
 };
 
-export const getGroupInfo = (gid:string) => {
+export const getGroupKeyList = (options: GetGroupKeyParams) => {
   return (dispatch: Dispatch) => {
-    im.getGroupsInfo([gid]).then((res) =>{
+    dispatch(setGroupMemberLoading(true));
+    im.getGroupKeyList(options).then((res) => {
+      // TODO: 赋值 给聊天时使用
+      console.log("groupKey list is %o", JSON.parse(res.data));
+      dispatch(setGroupMemberLoading(false));
+    });
+  };
+};
+
+
+export const getGroupInfo = (gid: string) => {
+  return (dispatch: Dispatch) => {
+    im.getGroupsInfo([gid]).then((res) => {
       dispatch(setGroupInfo(JSON.parse(res.data)[0]))
     }).catch(err => dispatch(setGroupInfo({} as GroupItem)));
   }

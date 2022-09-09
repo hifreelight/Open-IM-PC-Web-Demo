@@ -61,6 +61,7 @@ enum RequestFunc {
     KICKGROUPMEMBER="KickGroupMember",
     GETGROUPMEMBERSINFO="GetGroupMembersInfo",
     GETGROUPMEMBERLIST="GetGroupMemberList",
+    GETGROUPKEYLIST="GetGroupKeyList",
     GETJOINEDGROUPLIST="GetJoinedGroupList",
     CREATEGROUP="CreateGroup",
     SETGROUPINFO="SetGroupInfo",

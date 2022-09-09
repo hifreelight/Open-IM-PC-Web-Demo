@@ -39,6 +39,7 @@ import {
   isRecvParams,
   SearchLocalParams,
   InsertGroupMsgParams,
+  GetGroupKeyParams,
 } from "../types";
 
 export default class OpenIMSDK extends Emitter {
@@ -938,6 +939,19 @@ export default class OpenIMSDK extends Emitter {
     });
   };
 
+  getGroupKeyList = (data: GetGroupKeyParams, operationID?: string) => {
+    return new Promise<WsResponse>((resolve, reject) => {
+      const _uuid = operationID || uuid(this.uid as string);
+      const args = {
+        reqFuncName: RequestFunc.GETGROUPKEYLIST,
+        operationID: _uuid,
+        userID: this.uid,
+        data,
+      };
+      this.wsSend(args, resolve, reject);
+    });
+  };
+
   getJoinedGroupList = (operationID?: string) => {
     return new Promise<WsResponse>((resolve, reject) => {
       const _uuid = operationID || uuid(this.uid as string);
@@ -1217,7 +1231,7 @@ export default class OpenIMSDK extends Emitter {
       onClose = _onClose;
     }
 
-    let onError: any = () => {};
+    let onError: any = () => { };
     if (_onError) {
       onError = _onError;
     }
@@ -1234,7 +1248,7 @@ export default class OpenIMSDK extends Emitter {
     const platformNamespace = this.platform === "uni" ? uni : wx;
     this.ws = platformNamespace.connectSocket({
       url: this.wsUrl,
-      complete: () => {},
+      complete: () => { },
     });
     //@ts-ignore
     this.ws.onClose(onClose);

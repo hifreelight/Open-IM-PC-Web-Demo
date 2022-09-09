@@ -31,6 +31,7 @@ import {
   setGroupMemberList,
   setGroupInfo,
   getGroupMemberList,
+  getGroupKeyList,
 } from "../store/actions/contacts";
 import { getSelfInfo, getAdminToken } from "../store/actions/user";
 import { CbEvents } from "../utils/open_im_sdk";
@@ -210,6 +211,14 @@ const Auth = () => {
             count: 2000,
           };
           dispatch(getGroupMemberList(options));
+
+          // ge group key
+          const groupKeyOptions = {
+            groupID: result.groupID,
+            offset: 0,
+            count: 100,
+          };
+          dispatch(getGroupKeyList(groupKeyOptions));
         }
         break;
       case "deleted":
